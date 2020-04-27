@@ -5,7 +5,7 @@ export default ({ todos }) => {
   return (
     <ol className="task-list">
       {todos.map((item) => (
-        <li>{item}</li>
+        <li key={item.id}>{item.text}</li>
       ))}
     </ol>
   );
