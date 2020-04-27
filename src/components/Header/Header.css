@@ -34,3 +34,7 @@ h1 {
   box-sizing: border-box;
   cursor: pointer;
 }
+.add-btn:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}

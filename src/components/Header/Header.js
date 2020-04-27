@@ -21,7 +21,9 @@ export default ({ onFormSubmit }) => {
           onChange={(e) => setTodoValue(e.target.value)}
           value={todoValue}
         />
-        <button className="add-btn">Add task</button>
+        <button className="add-btn" disabled={!todoValue}>
+          Add task
+        </button>
       </form>
     </header>
   );
