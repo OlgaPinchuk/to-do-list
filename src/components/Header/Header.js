@@ -2,12 +2,23 @@ import React, { useState } from "react";
 import "./Header.css";
 
 export default ({ onFormSubmit }) => {
-  const [todoValue, setTodoValue] = useState("");
+  const [todoItem, setTodoItem] = useState({
+    text: "",
+    id: "",
+  });
+
+  const updateTodoItem = (e) => {
+    setTodoItem({
+      ...todoItem,
+      text: e.target.value,
+      id: Date.now(),
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onFormSubmit(todoValue);
-    setTodoValue("");
+    onFormSubmit(todoItem);
+    setTodoItem({ ...todoItem, text: "", id: "" });
   };
 
   return (
@@ -18,10 +29,10 @@ export default ({ onFormSubmit }) => {
           className="task-input"
           type="text"
           placeholder="Add new task"
-          onChange={(e) => setTodoValue(e.target.value)}
-          value={todoValue}
+          onChange={updateTodoItem}
+          value={todoItem.text}
         />
-        <button className="add-btn" disabled={!todoValue}>
+        <button className="add-btn" disabled={!todoItem.text}>
           Add task
         </button>
       </form>
