@@ -1,0 +1,36 @@
+.header {
+  padding: 1.5vw;
+  width: 100%;
+  height: 30vh;
+  text-align: center;
+  background: #46529d;
+  color: #fff;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+.task-input-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.task-input {
+  width: 40%;
+  padding: 0.5em;
+  box-sizing: border-box;
+}
+
+.add-btn {
+  padding: 0.5em;
+  color: #fff;
+  background: #2ebaee;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  cursor: pointer;
+}
