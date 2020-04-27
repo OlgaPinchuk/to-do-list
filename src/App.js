@@ -6,8 +6,8 @@ import ToDoList from "./components/ToDoList/ToDoList";
 function App() {
   const [todos, setTodos] = useState([]);
 
-  const saveTodo = (todoText) => {
-    setTodos([...todos, todoText]);
+  const saveTodo = (todoItem) => {
+    setTodos([...todos, todoItem]);
   };
 
   return (
