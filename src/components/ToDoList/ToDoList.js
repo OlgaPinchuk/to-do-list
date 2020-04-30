@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./ToDoList.css";
 
-export default ({ todos }) => {
+const ToDoList = ({ todos }) => {
   return (
     <ol className="task-list">
       {todos.map((item) => (
@@ -10,3 +11,14 @@ export default ({ todos }) => {
     </ol>
   );
 };
+
+ToDoList.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired,
+    })
+  ),
+};
+
+export default ToDoList;

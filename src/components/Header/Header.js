@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+
 import "./Header.css";
 
-export default ({ onFormSubmit }) => {
+const Header = ({ onFormSubmit }) => {
   const [todoItem, setTodoItem] = useState({
     text: "",
     id: "",
@@ -39,3 +41,9 @@ export default ({ onFormSubmit }) => {
     </header>
   );
 };
+
+Header.propTypes = {
+  onFormSubmit: PropTypes.func.isRequired,
+};
+
+export default Header;
