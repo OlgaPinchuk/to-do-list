@@ -2,7 +2,69 @@
   width: auto;
   margin: 5vh auto;
   font-size: 1.5em;
+  list-style-type: none;
 }
-.task-list li {
+
+.list-item {
+  position: relative;
   margin-bottom: 0.75em;
+}
+.list-item li {
+  display: inline-block;
+}
+.done-checkbox {
+  position: relative;
+  margin-right: 0.5em;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  border: 1px solid gray;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  outline: 0;
+  cursor: pointer;
+  transition: background 175ms cubic-bezier(0.1, 0.1, 0.25, 1);
+}
+.done-checkbox::before {
+  position: absolute;
+  content: "";
+  display: block;
+  top: 8%;
+  left: 25%;
+  width: 42%;
+  height: 60%;
+  border-style: solid;
+  border-color: #fff;
+  border-width: 0 0.15em 0.15em 0;
+  box-sizing: border-box;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+.done-checkbox:checked {
+  color: #fff;
+  border-color: #46529d;
+  background: #46529d;
+}
+.done-checkbox:checked::before {
+  opacity: 1;
+}
+.done-checkbox-label {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.done-checkbox-label::before {
+  position: absolute;
+  content: attr(data-content);
+  color: gray;
+  clip-path: polygon(0 0, 0 0, 0% 100%, 0 100%);
+  text-decoration: line-through;
+  text-decoration-thickness: 0.1em;
+  text-decoration-color: #46529d;
+  transition: clip-path 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.done-checkbox:checked ~ label::before {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
