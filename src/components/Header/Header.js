@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 
 import "./Header.css";
 
-const Header = ({ onFormSubmit }) => {
+const Header = ({ saveTodo }) => {
   const [todoItem, setTodoItem] = useState({
     text: "",
     id: "",
+    complete: false,
   });
 
   const updateTodoItem = (e) => {
@@ -14,13 +15,14 @@ const Header = ({ onFormSubmit }) => {
       ...todoItem,
       text: e.target.value,
       id: Date.now(),
+      complete: false,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onFormSubmit(todoItem);
-    setTodoItem({ ...todoItem, text: "", id: "" });
+    saveTodo(todoItem);
+    setTodoItem({ ...todoItem, text: "", id: "", complete: false });
   };
 
   return (
@@ -43,7 +45,7 @@ const Header = ({ onFormSubmit }) => {
 };
 
 Header.propTypes = {
-  onFormSubmit: PropTypes.func.isRequired,
+  saveTodo: PropTypes.func.isRequired,
 };
 
 export default Header;
