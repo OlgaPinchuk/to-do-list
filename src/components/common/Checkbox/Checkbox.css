@@ -1,6 +1,8 @@
 .default {
   display: inline-block;
   position: relative;
+  margin-right: 0.5em;
+  margin-top: auto;
   width: 1.5em;
   height: 1.5em;
   line-height: 1;
