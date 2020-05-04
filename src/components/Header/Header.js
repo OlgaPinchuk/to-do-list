@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-
 import "./Header.css";
+
+import Input from "../common/Input/Input";
 
 const Header = ({ saveTodo }) => {
   const [todoItem, setTodoItem] = useState({
@@ -29,16 +30,21 @@ const Header = ({ saveTodo }) => {
     <header className="header">
       <h1>Your tasks</h1>
       <form className="task-input-container" onSubmit={handleSubmit}>
-        <input
+        <Input
+          name="task-input"
           className="task-input"
-          type="text"
-          placeholder="Add new task"
           onChange={updateTodoItem}
           value={todoItem.text}
+          placeholder="Add new task"
         />
-        <button className="add-btn" disabled={!todoItem.text}>
-          Add task
-        </button>
+        <Input
+          id="submitButton"
+          name="submit-btn"
+          type="submit"
+          className="add-btn"
+          value="Add task"
+          disabled={!todoItem.text}
+        />
       </form>
     </header>
   );

@@ -5,7 +5,6 @@ import ToDoList from "./components/ToDoList/ToDoList";
 
 function App() {
   const [todos, setTodos] = useState([]);
-  let activeTodos = todos.filter((item) => !item.complete);
 
   const saveTodo = (todoItem) => {
     setTodos([...todos, todoItem]);
@@ -21,7 +20,7 @@ function App() {
   return (
     <>
       <Header saveTodo={saveTodo} />
-      <ToDoList activeTodos={activeTodos} completeTodo={completeTodo} />
+      <ToDoList todos={todos} completeTodo={completeTodo} />
     </>
   );
 }
