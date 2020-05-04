@@ -1,20 +1,26 @@
 .task-list {
   width: auto;
-  margin: 5vh auto;
-  font-size: 1.5em;
+  margin: 3vh 4vw;
+  font-size: 4em;
   list-style-type: none;
 }
 
 .list-item {
   position: relative;
   margin-bottom: 0.75em;
+  display: flex;
+  align-items: center;
 }
-.list-item li {
-  display: inline-block;
-}
+
 .done-checkbox {
   margin-right: 0.5em;
   transition: background 175ms cubic-bezier(0.1, 0.1, 0.25, 1);
+}
+.default.done-checkbox {
+  margin-right: 1.5em;
+  margin-top: 0;
+  width: 4.5em;
+  height: 5.5em;
 }
 
 .done-checkbox-label {
@@ -35,4 +41,17 @@
 }
 .done-checkbox:checked ~ label::before {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+.show-completed-wrapper {
+  margin: 3em;
+  display: flex;
+  align-items: center;
+}
+.default.show-completed-checkbox {
+  width: 5em;
+  height: 5em;
+  margin-right: 2em;
+}
+.show-completed-label {
+  font-size: 4em;
 }

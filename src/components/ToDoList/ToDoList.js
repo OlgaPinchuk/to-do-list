@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./ToDoList.css";
+import ListItem from "../ListItem/ListItem";
 
 import Checkbox from "../common/Checkbox/Checkbox";
 
@@ -17,40 +18,32 @@ const ToDoList = ({ todos, completeTodo }) => {
 
   return (
     <>
-      <Checkbox
-        id="showCompleted"
-        name="show-completed"
-        className="show-completed-checkbox"
-        onChange={showCompleted}
-        disabled={!todos.length}
-      />
-      <label htmlFor="showCompleted" className="show-completed-label">
-        Show Completed Tasks
-      </label>
-
-      <ol className="task-list">
-        <TransitionGroup className="todo-list task-list">
+      <div className="show-completed-wrapper">
+        <Checkbox
+          id="showCompleted"
+          name="show-completed"
+          className="show-completed-checkbox"
+          onChange={showCompleted}
+          disabled={!todos.length}
+        />
+        <label htmlFor="showCompleted" className="show-completed-label">
+          Show Completed Tasks
+        </label>
+      </div>
+      <div className="task-list">
+        <TransitionGroup>
           {itemsToShow.map(({ id, text, complete }) => (
             <CSSTransition key={id} timeout={500}>
-              <li className="list-item" onClick={() => completeTodo(id)}>
-                <Checkbox
-                  name="select-done"
-                  id={id}
-                  className="done-checkbox"
-                  disabled={complete}
-                />
-                <label
-                  htmlFor={id}
-                  className="done-checkbox-label"
-                  data-content={text}
-                >
-                  {text}
-                </label>
-              </li>
+              <ListItem
+                id={id}
+                complete={complete}
+                text={text}
+                completeTodo={completeTodo}
+              />
             </CSSTransition>
           ))}
         </TransitionGroup>
-      </ol>
+      </div>
     </>
   );
 };
