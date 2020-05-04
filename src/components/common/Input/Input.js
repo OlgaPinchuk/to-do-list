@@ -2,7 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Input = (props) => {
-  const { id, type, name, value, className, onChange, placeholder } = props;
+  const {
+    id,
+    type,
+    name,
+    value,
+    className,
+    onChange,
+    placeholder,
+    disabled,
+  } = props;
 
   return (
     <input
@@ -11,6 +20,7 @@ const Input = (props) => {
       name={name}
       value={value}
       className={className}
+      disabled={disabled}
       onChange={onChange}
       placeholder={placeholder}
     />
@@ -25,6 +35,7 @@ Input.propTypes = {
   type: PropTypes.oneOf(["text", "submit"]),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 Input.defaultProps = {
