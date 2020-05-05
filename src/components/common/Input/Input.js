@@ -28,14 +28,14 @@ const Input = (props) => {
 };
 
 Input.propTypes = {
-  name: PropTypes.string.isRequired,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  className: PropTypes.string,
-  placeholder: PropTypes.string,
   type: PropTypes.oneOf(["text", "submit"]),
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onChange: PropTypes.func,
+  className: PropTypes.string,
   disabled: PropTypes.bool,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
 };
 
 Input.defaultProps = {
