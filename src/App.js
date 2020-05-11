@@ -7,14 +7,16 @@ function App() {
   const [todos, setTodos] = useState([]);
 
   const saveTodo = (todoItem) => {
-    setTodos([...todos, todoItem]);
+    setTodos([todoItem, ...todos]);
   };
 
   const completeTodo = (todoId) => {
-    const newTodos = [...todos];
-    const newTodoIndex = newTodos.findIndex((item) => item.id === todoId);
-    newTodos[newTodoIndex].complete = true;
-    setTodos([...newTodos]);
+    const newTodoIndex = todos.findIndex((item) => item.id === todoId);
+    if (newTodoIndex !== -1) {
+      const newTodos = [...todos];
+      newTodos[newTodoIndex].complete = true;
+      setTodos([...newTodos]);
+    }
   };
 
   return (
