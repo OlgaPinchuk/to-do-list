@@ -7,23 +7,19 @@ import Input from "../common/Input/Input";
 const Header = ({ saveTodo }) => {
   const [todoItem, setTodoItem] = useState({
     text: "",
-    id: "",
-    complete: false,
   });
 
   const updateTodoItem = (e) => {
     setTodoItem({
       ...todoItem,
       text: e.target.value,
-      id: Date.now(),
-      complete: false,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    saveTodo(todoItem);
-    setTodoItem({ ...todoItem, text: "", id: "", complete: false });
+    saveTodo({ ...todoItem, id: Date.now(), complete: false });
+    setTodoItem({ ...todoItem, text: "" });
   };
 
   return (
