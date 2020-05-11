@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const Input = (props) => {
   const {
     id,
-    type,
+    type = "text",
     name,
     value,
     className,
@@ -29,17 +29,13 @@ const Input = (props) => {
 
 Input.propTypes = {
   type: PropTypes.oneOf(["text", "submit"]),
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
-};
-
-Input.defaultProps = {
-  type: "text",
 };
 
 export default Input;
