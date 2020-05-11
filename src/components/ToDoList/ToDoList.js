@@ -9,11 +9,12 @@ import Checkbox from "../common/Checkbox/Checkbox";
 const ToDoList = ({ todos, completeTodo }) => {
   const [completedShown, setCompletedShown] = useState(false);
 
-  const activeTodos = todos.filter((item) => !item.complete);
-  const itemsToShow = completedShown ? todos : activeTodos;
+  const itemsToShow = completedShown
+    ? todos
+    : todos.filter((item) => !item.complete);
 
-  const showCompleted = () => {
-    setCompletedShown(!completedShown);
+  const showCompleted = (checked) => {
+    setCompletedShown(checked);
   };
 
   return (
@@ -23,8 +24,8 @@ const ToDoList = ({ todos, completeTodo }) => {
           id="showCompleted"
           name="show-completed"
           className="show-completed-checkbox"
-          onChange={showCompleted}
-          disabled={!todos.length}
+          initialIsChecked={completedShown}
+          onChanged={showCompleted}
         />
         <label htmlFor="showCompleted" className="show-completed-label">
           Show Completed Tasks
