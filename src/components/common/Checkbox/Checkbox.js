@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./Checkbox.css";
 
 const Checkbox = (props) => {
-  const { id, name, value, disabled, className, onChange, checked } = props;
+  const {
+    id,
+    name,
+    disabled = false,
+    initialIsChecked = false,
+    className,
+    onChanged,
+  } = props;
+
+  const [isChecked, setIsChecked] = useState(initialIsChecked);
+
+  const onChange = ({ target: { checked } }) => {
+    setIsChecked(checked);
+    onChanged && onChanged(checked);
+  };
 
   return (
     <input
       type="checkbox"
       id={id}
       name={name}
-      value={value}
       disabled={disabled}
-      checked={checked}
+      checked={isChecked}
       className={`default ${className}`}
       onChange={onChange}
     />
@@ -21,20 +34,11 @@ const Checkbox = (props) => {
 
 Checkbox.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  name: PropTypes.string,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.bool,
-  ]),
+  name: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
-  checked: PropTypes.bool,
+  initialIsChecked: PropTypes.bool,
   className: PropTypes.string,
-  onChange: PropTypes.func,
-};
-
-Checkbox.defaultProps = {
-  disabled: false,
+  onChanged: PropTypes.func,
 };
 
 export default Checkbox;
