@@ -9,6 +9,7 @@ const ListItem = ({ id, complete, text, completeTodo }) => (
       id={id}
       className="done-checkbox"
       disabled={complete}
+      initialIsChecked={complete}
     />
     <label htmlFor={id} className="done-checkbox-label" data-content={text}>
       {text}

@@ -34,7 +34,7 @@ const ToDoList = ({ todos, completeTodo }) => {
       <div className="task-list">
         <TransitionGroup>
           {itemsToShow.map(({ id, text, complete }) => (
-            <CSSTransition key={id} timeout={500}>
+            <CSSTransition key={id} timeout={300}>
               <ListItem
                 id={id}
                 complete={complete}
