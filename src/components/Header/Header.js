@@ -5,21 +5,14 @@ import "./Header.css";
 import Input from "../common/Input/Input";
 
 const Header = ({ saveTodo }) => {
-  const [todoItem, setTodoItem] = useState({
-    text: "",
-  });
+  const [todoItem, setTodoItem] = useState("");
 
-  const updateTodoItem = (e) => {
-    setTodoItem({
-      ...todoItem,
-      text: e.target.value,
-    });
-  };
+  const updateTodoItem = (e) => setTodoItem(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    saveTodo({ ...todoItem, id: Date.now(), complete: false });
-    setTodoItem({ ...todoItem, text: "" });
+    saveTodo({ text: todoItem, id: Date.now(), complete: false });
+    setTodoItem("");
   };
 
   return (
@@ -30,7 +23,7 @@ const Header = ({ saveTodo }) => {
           name="task-input"
           className="task-input"
           onChange={updateTodoItem}
-          value={todoItem.text}
+          value={todoItem}
           placeholder="Add new task"
         />
         <Input
@@ -39,7 +32,7 @@ const Header = ({ saveTodo }) => {
           type="submit"
           className="add-btn"
           value="Add task"
-          disabled={!todoItem.text}
+          disabled={!todoItem}
         />
       </form>
     </header>
