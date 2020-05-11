@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Checkbox from "../common/Checkbox/Checkbox";
 
-const ListItem = ({ id, complete, text, completeTodo }) => (
+const ListItem = ({ item: { id, complete, text }, completeTodo }) => (
   <div className="list-item" onClick={() => completeTodo(id)}>
     <Checkbox
       name="select-done"
@@ -18,9 +18,11 @@ const ListItem = ({ id, complete, text, completeTodo }) => (
 );
 
 ListItem.propTypes = {
-  id: PropTypes.number.isRequired,
-  complete: PropTypes.bool.isRequired,
-  text: PropTypes.string.isRequired,
+  item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    complete: PropTypes.bool,
+    text: PropTypes.string.isRequired,
+  }).isRequired,
   completeTodo: PropTypes.func.isRequired,
 };
 
