@@ -29,7 +29,7 @@ const Input = (props) => {
 
 Input.propTypes = {
   type: PropTypes.oneOf(["text", "submit"]),
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,
