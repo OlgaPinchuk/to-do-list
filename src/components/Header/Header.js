@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./Header.css";
 
 import Input from "../common/Input/Input";
 
 const Header = ({ saveTodo }) => {
+  console.log("Header is rendered");
   const [todoItem, setTodoItem] = useState("");
+  const [, setRenderCount] = useState(0);
 
-  const updateTodoItem = (e) => setTodoItem(e.target.value);
+  // useEffect(() => {
+  //   const id = setInterval(() => {
+  //     setRenderCount((toggle) => !toggle);
+  //   }, 1000);
+  //   return () => clearInterval(id);
+  // }, []);
+
+  const updateTodoItem = useCallback((e) => setTodoItem(e.target.value), []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,4 +52,4 @@ Header.propTypes = {
   saveTodo: PropTypes.func.isRequired,
 };
 
-export default Header;
+export default React.memo(Header);

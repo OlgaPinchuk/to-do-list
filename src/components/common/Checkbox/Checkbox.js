@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./Checkbox.css";
 
 const Checkbox = (props) => {
+  console.log("Checkbox is rendered");
   const {
     id,
     name,
