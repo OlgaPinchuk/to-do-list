@@ -7,7 +7,7 @@ import Input from "../common/Input/Input";
 const Header = ({ saveTodo }) => {
   console.log("Header is rendered");
   const [todoItem, setTodoItem] = useState("");
-  const [, setRenderCount] = useState(0);
+  //  const [, setRenderCount] = useState(0);
 
   // useEffect(() => {
   //   const id = setInterval(() => {
