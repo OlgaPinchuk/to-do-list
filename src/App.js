@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     document.title = `${todos.length} items in list`;
     console.log(`${todos.length} items to do`);
-  }, [todos]);
+  }, [todos.length]);
 
   const saveTodo = useCallback((todoItem) => {
     setTodos((stateTodos) => {

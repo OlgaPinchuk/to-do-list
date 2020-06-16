@@ -12,7 +12,7 @@ const ToDoList = ({ todos, completeTodo }) => {
 
   const itemsToShow = useMemo(
     () => (completedShown ? todos : todos.filter((item) => !item.complete)),
-    [todos, completedShown]
+    [completedShown, todos]
   );
 
   const showCompleted = (checked) => {
