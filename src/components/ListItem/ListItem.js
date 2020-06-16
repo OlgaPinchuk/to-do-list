@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Checkbox from "../common/Checkbox/Checkbox";
 
 const ListItem = ({ item: { id, complete, text }, completeTodo }) => {
-  console.log("ListItem is rendered");
+  //console.log("ListItem is rendered");
   return (
     <div className="list-item" onClick={() => completeTodo(id)}>
       <Checkbox

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./ToDoList.css";
@@ -7,12 +7,13 @@ import ListItem from "../ListItem/ListItem";
 import Checkbox from "../common/Checkbox/Checkbox";
 
 const ToDoList = ({ todos, completeTodo }) => {
-  console.log("ToDoList is rendered");
+  //console.log("ToDoList is rendered");
   const [completedShown, setCompletedShown] = useState(false);
 
-  const itemsToShow = completedShown
-    ? todos
-    : todos.filter((item) => !item.complete);
+  const itemsToShow = useMemo(
+    () => (completedShown ? todos : todos.filter((item) => !item.complete)),
+    [todos, completedShown]
+  );
 
   const showCompleted = (checked) => {
     setCompletedShown(checked);

@@ -3,18 +3,10 @@ import PropTypes from "prop-types";
 import "./Header.css";
 
 import Input from "../common/Input/Input";
+const MemoizedInput = React.memo(Input);
 
 const Header = ({ saveTodo }) => {
-  console.log("Header is rendered");
   const [todoItem, setTodoItem] = useState("");
-  //  const [, setRenderCount] = useState(0);
-
-  // useEffect(() => {
-  //   const id = setInterval(() => {
-  //     setRenderCount((toggle) => !toggle);
-  //   }, 1000);
-  //   return () => clearInterval(id);
-  // }, []);
 
   const updateTodoItem = useCallback((e) => setTodoItem(e.target.value), []);
 
@@ -28,14 +20,14 @@ const Header = ({ saveTodo }) => {
     <header className="header">
       <h1>Your tasks</h1>
       <form className="task-input-container" onSubmit={handleSubmit}>
-        <Input
+        <MemoizedInput
           name="task-input"
           className="task-input"
           onChange={updateTodoItem}
           value={todoItem}
           placeholder="Add new task"
         />
-        <Input
+        <MemoizedInput
           id="submitButton"
           name="submit-btn"
           type="submit"
@@ -52,4 +44,4 @@ Header.propTypes = {
   saveTodo: PropTypes.func.isRequired,
 };
 
-export default React.memo(Header);
+export default Header;

@@ -15,6 +15,11 @@ function App() {
   //   return () => clearInterval(id);
   // }, []);
 
+  useEffect(() => {
+    document.title = `${todos.length} items in list`;
+    console.log(`${todos.length} items to do`);
+  }, [todos]);
+
   const saveTodo = useCallback((todoItem) => {
     setTodos((stateTodos) => {
       const newTodos = [todoItem, ...stateTodos];
@@ -44,4 +49,4 @@ function App() {
   );
 }
 
-export default React.memo(App);
+export default App;
