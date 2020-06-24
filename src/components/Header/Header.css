@@ -41,3 +41,7 @@
   opacity: 0.6;
   pointer-events: none;
 }
+
+.dark {
+  background-color: black;
+}
