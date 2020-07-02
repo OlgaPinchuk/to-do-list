@@ -4,16 +4,7 @@ import Header from "./components/Header/Header";
 import ToDoList from "./components/ToDoList/ToDoList";
 
 function App() {
-  // console.log("App is rendered");
   const [todos, setTodos] = useState([]);
-  // const [, setRenderCount] = useState(0);
-
-  // useEffect(() => {
-  //   const id = setInterval(() => {
-  //     setRenderCount((toggle) => !toggle);
-  //   }, 1000);
-  //   return () => clearInterval(id);
-  // }, []);
 
   useEffect(() => {
     document.title = `${todos.length} items in list`;

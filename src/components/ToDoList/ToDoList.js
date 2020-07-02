@@ -7,7 +7,6 @@ import ListItem from "../ListItem/ListItem";
 import Checkbox from "../common/Checkbox/Checkbox";
 
 const ToDoList = ({ todos, completeTodo }) => {
-  //console.log("ToDoList is rendered");
   const [completedShown, setCompletedShown] = useState(false);
 
   const itemsToShow = useMemo(
