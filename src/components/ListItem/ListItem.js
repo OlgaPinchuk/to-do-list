@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import Checkbox from "../common/Checkbox/Checkbox";
+import { ListContext } from "../../ListContext";
 
-const ListItem = ({ item: { id, complete, text }, completeTodo }) => {
-  //console.log("ListItem is rendered");
+const ListItem = ({ item: { id, complete, text } }) => {
+  //  console.log("ListItem is rendered");
+  const { completeTodo } = useContext(ListContext);
+
   return (
     <div className="list-item" onClick={() => completeTodo(id)}>
       <Checkbox
@@ -26,7 +29,6 @@ ListItem.propTypes = {
     complete: PropTypes.bool,
     text: PropTypes.string.isRequired,
   }).isRequired,
-  completeTodo: PropTypes.func.isRequired,
 };
 
 export default React.memo(ListItem);

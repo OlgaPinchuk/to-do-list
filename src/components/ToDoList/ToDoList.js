@@ -6,8 +6,9 @@ import ListItem from "../ListItem/ListItem";
 
 import Checkbox from "../common/Checkbox/Checkbox";
 
-const ToDoList = ({ todos, completeTodo }) => {
-  //console.log("ToDoList is rendered");
+const ToDoList = ({ todos }) => {
+  // console.log("ToDoList is rendered");
+
   const [completedShown, setCompletedShown] = useState(false);
 
   const itemsToShow = useMemo(
@@ -37,7 +38,7 @@ const ToDoList = ({ todos, completeTodo }) => {
         <TransitionGroup>
           {itemsToShow.map((item) => (
             <CSSTransition key={item.id} timeout={300}>
-              <ListItem item={item} completeTodo={completeTodo} />
+              <ListItem item={item} />
             </CSSTransition>
           ))}
         </TransitionGroup>
@@ -48,7 +49,6 @@ const ToDoList = ({ todos, completeTodo }) => {
 
 ToDoList.propTypes = {
   todos: PropTypes.array.isRequired,
-  completeTodo: PropTypes.func.isRequired,
 };
 
 export default React.memo(ToDoList);
