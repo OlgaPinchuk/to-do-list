@@ -19,14 +19,12 @@ export const reducer = (state = initState, action) => {
 
 function increment(state, action) {
   return {
-    ...state,
-    counter: state.counter + 1,
+    counter: state.counter + action.counter,
   };
 }
 
 function decrement(state, action) {
   return {
-    ...state,
-    counter: state.counter - 1,
+    counter: state.counter - action.counter,
   };
 }
