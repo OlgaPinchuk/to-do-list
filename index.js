@@ -1,14 +1,30 @@
 import { createStore } from "redux";
 import { reducer } from "./reducer";
-import { increment, decrement } from "./actionTypes";
+import {
+  saveTodo,
+  completeTodo,
+  showCompleted,
+  toggleTheme,
+} from "./actionTypes";
 
 const store = createStore(reducer);
 
 console.log(store);
 console.log(store.getState());
-store.dispatch(increment(5));
+
+store.dispatch(saveTodo("First todo"));
+store.dispatch(saveTodo("Second todo"));
+store.dispatch(saveTodo("Third todo"));
 console.log(store.getState());
-store.dispatch(increment(10));
+
+store.dispatch(completeTodo(1));
 console.log(store.getState());
-store.dispatch(decrement(-2));
+
+store.dispatch(showCompleted(false));
+console.log(store.getState());
+
+store.dispatch(toggleTheme());
+console.log(store.getState());
+
+store.dispatch(toggleTheme());
 console.log(store.getState());
