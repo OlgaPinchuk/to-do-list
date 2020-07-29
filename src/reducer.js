@@ -23,19 +23,23 @@ export const reducer = createReducer(initState, {
 
 function saveTodo(state, action) {
   return {
-    ...state,
+    ...state, // test 1
     todos: [
       {
         text: action.text,
         id: action.id,
         completed: false,
-      },
-      ...state.todos,
+      }, // test 2 - new item is added, test 3 - new item is added first
+      ...state.todos, // test 4 - existing items are preserved
     ],
   };
 }
 
 function completeTodo(state, action) {
+  // test 1 - updates existing todo and returns new state
+  // test 2 - during updated of existing todo item - return new object
+  // test 3 - doesn't update state if todo doesn't exist
+  // test 4 - preserves existing todos during update
   const stateTodos = [...state.todos];
   const index = state.todos.findIndex((item) => item.id === action.id);
 
@@ -50,6 +54,10 @@ function completeTodo(state, action) {
 
 function showCompleted(state, action) {
   const { completedShown } = action;
+
+  if (completedShown === state.completedShown)
+    return state;
+
   return {
     ...state,
     completedShown,
