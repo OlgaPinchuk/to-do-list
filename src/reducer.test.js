@@ -1,21 +1,26 @@
-import { reducer } from './reducer';
-import { toggleTheme, showCompleted } from './actionTypes';
+import { reducer } from "./reducer";
+import {
+  toggleTheme,
+  showCompleted,
+  saveTodo,
+  completeTodo,
+} from "./actionTypes";
 
-describe('reducer tests', () => {
-  test('returns state by default', () => {
+describe("reducer tests", () => {
+  test("returns state by default", () => {
     const state = { todos: [] };
 
     let result = reducer(state, {});
     expect(result).toBe(state); // assert
 
-    result = reducer(state, { type: '' });
+    result = reducer(state, { type: "" });
     expect(result).toBe(state); // assert
 
-    result = reducer(state, { type: 'UNKNOWN' });
+    result = reducer(state, { type: "UNKNOWN" });
     expect(result).toBe(state); // assert
   });
 
-  describe('completedShown tests', () => {
+  describe("completedShown tests", () => {
     for (const { initial, expected } of [
       { initial: false, expected: true },
       { initial: true, expected: false },
@@ -27,10 +32,10 @@ describe('reducer tests', () => {
         const result = reducer(state, action);
 
         expect(result.completedShown).toBe(expected);
-      })
+      });
     }
 
-    test('ignores setting completedShown into the same value', () => {
+    test("ignores setting completedShown into the same value", () => {
       const state = { completedShown: true };
       const action = showCompleted(true);
       const result = reducer(state, action);
@@ -39,11 +44,11 @@ describe('reducer tests', () => {
     });
   });
 
-  describe('theme tests', () => {
-    test('preserves state during theme switch', () => {
+  describe("theme tests", () => {
+    test("preserves state during theme switch", () => {
       const todo = { id: 1 };
       const state = {
-        theme: 'light',
+        theme: "light",
         todos: [todo],
         completedShown: true,
       };
@@ -58,23 +63,23 @@ describe('reducer tests', () => {
       expect(result.completedShown).toBe(true);
     });
 
-    test('changes theme to dark from light', () => {
-      const state = { theme: 'light' };
+    test("changes theme to dark from light", () => {
+      const state = { theme: "light" };
       const action = toggleTheme();
 
       let result = reducer(state, action);
-      expect(result.theme).toBe('dark');
+      expect(result.theme).toBe("dark");
     });
 
-    test('changes theme to light from dark', () => {
-      const state = { theme: 'dark' };
+    test("changes theme to light from dark", () => {
+      const state = { theme: "dark" };
       const action = toggleTheme();
 
       let result = reducer(state, action);
-      expect(result.theme).toBe('light');
+      expect(result.theme).toBe("light");
     });
 
-    test('should always return new object', () => {
+    test("should always return new object", () => {
       const state = {};
       const action = toggleTheme();
 
@@ -82,5 +87,109 @@ describe('reducer tests', () => {
 
       expect(result).not.toBe(state);
     });
+  });
+
+  describe("saveTodo tests", () => {
+    test("return new object state", () => {
+      const state = { todos: [] };
+      const action = saveTodo("Todo");
+      const result = reducer(state, action);
+
+      expect(result).not.toBe(state);
+    });
+
+    test("new item is added", () => {
+      const state = { todos: [] };
+      const action = saveTodo("First todo");
+      const expected = [{ text: "First todo", id: 1, completed: false }];
+      const result = reducer(state, action);
+
+      expect(result.todos).toEqual(expected);
+    });
+
+    test("new item is added first", () => {
+      const state = {
+        todos: [
+          { text: "Second to do", id: 2, completed: true },
+          { text: "First to do", id: 1, completed: true },
+        ],
+      };
+      const action = saveTodo("Some to do");
+      const expected = "Some to do";
+      const result = reducer(state, action);
+
+      expect(result.todos[0].text).toBe(expected);
+    });
+
+    test("existing items are preserved", () => {
+      const state = {
+        todos: [
+          { text: "Second to do", id: 2, completed: true },
+          { text: "First to do", id: 1, completed: true },
+        ],
+      };
+      const action = saveTodo("Some to do");
+      const result = reducer(state, action);
+      expect(result.todos.length).toBe(3);
+      expect(result.todos[2].id).toBe(1);
+    });
+  });
+
+  describe("completeTodo tests", () => {
+    it("updates existing todo and returns new state", () => {
+      const state = {
+        theme: "light",
+        todos: [
+          { id: 1, completed: false },
+          { id: 2, completed: false },
+        ],
+        completedShown: true,
+      };
+
+      const action = completeTodo(1);
+
+      const result = reducer(state, action);
+
+      expect(result.todos[1].completed).toBe(false);
+      expect(result.todos[0].completed).toBe(true);
+      expect(result.theme).toBe("light");
+    });
+
+    it("returns new object during updated of existing todo item", () => {
+      const state = {
+        todos: [{ id: 1, completed: false }],
+      };
+
+      const action = completeTodo(1);
+
+      const result = reducer(state, action);
+
+      expect(result).not.toBe(state);
+    });
+
+    it("doesn't update state if todo doesn't exist", () => {
+      const state = {
+        todos: [{ id: 0, completed: false }],
+      };
+
+      const action = completeTodo(2);
+
+      const result = reducer(state, action);
+
+      expect(result).toEqual(state);
+    });
+  });
+
+  it("preserves existing todos during update", () => {
+    const state = {
+      todos: [
+        { text: "Second to do", id: 2, completed: true },
+        { text: "First to do", id: 1, completed: false },
+      ],
+    };
+    const action = completeTodo(2);
+    const result = reducer(state, action);
+    expect(result.todos.length).toBe(2);
+    expect(result.todos[1].completed).toBeFalsy();
   });
 });
