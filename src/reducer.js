@@ -40,15 +40,15 @@ function completeTodo(state, action) {
   // test 2 - during updated of existing todo item - return new object
   // test 3 - doesn't update state if todo doesn't exist
   // test 4 - preserves existing todos during update
-  const stateTodos = [...state.todos];
   const index = state.todos.findIndex((item) => item.id === action.id);
+  if (index === -1)
+    return state;
 
-  if (index !== -1) {
-    stateTodos[index].completed = true;
-  }
   return {
     ...state,
-    todos: [...stateTodos],
+    todos: state.todos.map((item, i) => index === i
+      ? { ...item, completed: true }
+      : item),
   };
 }
 

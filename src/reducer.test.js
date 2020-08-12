@@ -150,14 +150,16 @@ describe("reducer tests", () => {
 
       const result = reducer(state, action);
 
+      expect(result).not.toBe(state);
       expect(result.todos[1].completed).toBe(false);
       expect(result.todos[0].completed).toBe(true);
       expect(result.theme).toBe("light");
     });
 
-    it("returns new object during updated of existing todo item", () => {
+    it("returns new object during update of existing todo item", () => {
+      const todo = { id: 1, completed: false };
       const state = {
-        todos: [{ id: 1, completed: false }],
+        todos: [todo],
       };
 
       const action = completeTodo(1);
@@ -165,6 +167,8 @@ describe("reducer tests", () => {
       const result = reducer(state, action);
 
       expect(result).not.toBe(state);
+      expect(result.todos[0]).not.toBe(todo);
+      expect(result.todos[0].completed).toBe(true);
     });
 
     it("doesn't update state if todo doesn't exist", () => {
@@ -176,20 +180,20 @@ describe("reducer tests", () => {
 
       const result = reducer(state, action);
 
-      expect(result).toEqual(state);
+      expect(result).toBe(state);
     });
-  });
 
-  it("preserves existing todos during update", () => {
-    const state = {
-      todos: [
-        { text: "Second to do", id: 2, completed: true },
-        { text: "First to do", id: 1, completed: false },
-      ],
-    };
-    const action = completeTodo(2);
-    const result = reducer(state, action);
-    expect(result.todos.length).toBe(2);
-    expect(result.todos[1].completed).toBeFalsy();
+    it("preserves existing todos during update", () => {
+      const state = {
+        todos: [
+          { text: "Second to do", id: 2, completed: true },
+          { text: "First to do", id: 1, completed: false },
+        ],
+      };
+      const action = completeTodo(2);
+      const result = reducer(state, action);
+      expect(result.todos.length).toBe(2);
+      expect(result.todos[1].completed).toBeFalsy();
+    });
   });
 });
