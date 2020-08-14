@@ -3,6 +3,12 @@ import "./App.css";
 import Header from "../Header/Header";
 import ToDoList from "../ToDoList/ToDoList";
 
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from '../../behavior/rootReducer';
+
+const store = createStore(rootReducer);
+
 function App() {
   const [todos, setTodos] = useState([]);
 
@@ -20,10 +26,10 @@ function App() {
   };
 
   return (
-    <>
+    <Provider store={store}>
       <Header saveTodo={saveTodo} />
       <ToDoList todos={todos} completeTodo={completeTodo} />
-    </>
+    </Provider>
   );
 }
 
