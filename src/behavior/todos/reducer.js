@@ -1,9 +1,9 @@
-import { createReducer } from "./createReducer";
+import { createReducer } from "../createReducer";
 import { SAVE_TODO, COMPLETE_TODO } from "./actionTypes";
 
 const initialState = [];
 
-export const todosReducer = createReducer(initialState, {
+export default createReducer(initialState, {
   [SAVE_TODO]: saveTodo,
   [COMPLETE_TODO]: completeTodo,
 });

@@ -1,13 +1,7 @@
 import { createStore, combineReducers } from "redux";
-import {
-  saveTodo,
-  completeTodo,
-  showCompleted,
-  toggleTheme,
-} from "./src/actionTypes";
-import { todosReducer } from "./src/todosReducer";
-import { themeReducer } from "./src/themeReducer";
-import { completedShownReducer } from "./src/completedShownReducer";
+import { reducer as todosReducer, saveTodo, completeTodo } from "./src/behavior/todos";
+import { reducer as themeReducer, toggleTheme } from "./src/behavior/theme";
+import { reducer as completedShownReducer, showCompleted } from "./src/behavior/completedShown";
 
 const rootReducer = combineReducers({
   todos: todosReducer,

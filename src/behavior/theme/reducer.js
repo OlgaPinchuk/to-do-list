@@ -1,9 +1,9 @@
 import { TOGGLE_THEME } from "./actionTypes";
-import { createReducer } from "./createReducer";
+import { createReducer } from "../createReducer";
 
 const initialState = "light";
 
-export const themeReducer = createReducer(initialState, {
+export default createReducer(initialState, {
   [TOGGLE_THEME]: toggleTheme,
 });
 
