@@ -13,7 +13,7 @@ const ToDoList = () => {
 
   const itemsToShow = completedShown
     ? todos
-    : todos.filter((item) => !item.complete);
+    : todos.filter((item) => !item.completed);
 
   const clickHandler = (checked) => {
     dispatch(showCompleted(checked));
