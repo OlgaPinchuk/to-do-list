@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
-import Header from "./components/Header/Header";
-import ToDoList from "./components/ToDoList/ToDoList";
+import Header from "../Header/Header";
+import ToDoList from "../ToDoList/ToDoList";
 
 function App() {
   const [todos, setTodos] = useState([]);
