@@ -7,14 +7,13 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from '../../behavior/rootReducer';
 
-const store = createStore(rootReducer);
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 function App() {
   const [todos, setTodos] = useState([]);
-
-  const saveTodo = (todoItem) => {
-    setTodos([todoItem, ...todos]);
-  };
 
   const completeTodo = (todoId) => {
     const newTodoIndex = todos.findIndex((item) => item.id === todoId);
@@ -27,7 +26,7 @@ function App() {
 
   return (
     <Provider store={store}>
-      <Header saveTodo={saveTodo} />
+      <Header />
       <ToDoList todos={todos} completeTodo={completeTodo} />
     </Provider>
   );

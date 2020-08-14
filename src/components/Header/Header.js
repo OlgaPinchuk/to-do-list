@@ -3,15 +3,18 @@ import PropTypes from "prop-types";
 import "./Header.css";
 
 import Input from "../common/Input/Input";
+import { saveTodo } from '../../behavior/todos';
+import { useDispatch } from "react-redux";
 
-const Header = ({ saveTodo }) => {
+const Header = () => {
+  const dispatch = useDispatch()
   const [todoItem, setTodoItem] = useState("");
 
   const updateTodoItem = (e) => setTodoItem(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    saveTodo({ text: todoItem, id: Date.now(), complete: false });
+    dispatch(saveTodo(todoItem));
     setTodoItem("");
   };
 
