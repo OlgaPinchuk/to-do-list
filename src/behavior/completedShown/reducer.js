@@ -1,9 +1,9 @@
-import { createReducer } from "./createReducer";
-import { COMPLETED_SHOWN } from "./actionTypes";
+import { COMPLETED_SHOWN } from "./actions";
+import { createReducer } from "../utils/createReducer";
 
 const initialState = false;
 
-export const completedShownReducer = createReducer(initialState, {
+export default createReducer(initialState, {
   [COMPLETED_SHOWN]: showCompleted,
 });
 

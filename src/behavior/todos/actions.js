@@ -11,14 +11,3 @@ export const completeTodo = (id) => ({
   type: COMPLETE_TODO,
   id,
 });
-
-export const COMPLETED_SHOWN = "COMPLETED_SHOWN";
-export const showCompleted = (completedShown) => ({
-  type: COMPLETED_SHOWN,
-  completedShown,
-});
-
-export const TOGGLE_THEME = "TOGGLE_THEME";
-export const toggleTheme = () => ({
-  type: TOGGLE_THEME,
-});

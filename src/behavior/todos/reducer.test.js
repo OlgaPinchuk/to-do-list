@@ -1,17 +1,17 @@
-import { todosReducer } from "../todosReducer";
-import { saveTodo, completeTodo } from "../actionTypes";
+import reducer from "./reducer";
+import { saveTodo, completeTodo } from "./actions";
 
-describe("todosReducer tests", () => {
+describe("reducer tests", () => {
   test("returns state by default", () => {
     const state = [];
 
-    let result = todosReducer(state, {});
+    let result = reducer(state, {});
     expect(result).toBe(state); // assert
 
-    result = todosReducer(state, { type: "" });
+    result = reducer(state, { type: "" });
     expect(result).toBe(state); // assert
 
-    result = todosReducer(state, { type: "UNKNOWN" });
+    result = reducer(state, { type: "UNKNOWN" });
     expect(result).toBe(state); // assert
   });
 
@@ -19,7 +19,7 @@ describe("todosReducer tests", () => {
     test("return new array state", () => {
       const state = [];
       const action = saveTodo("Todo");
-      const result = todosReducer(state, action);
+      const result = reducer(state, action);
 
       expect(result).not.toBe(state);
     });
@@ -28,7 +28,7 @@ describe("todosReducer tests", () => {
       const state = [];
       const action = saveTodo("First todo");
       const expected = [{ text: "First todo", id: 1, completed: false }];
-      const result = todosReducer(state, action);
+      const result = reducer(state, action);
 
       expect(result).toEqual(expected);
     });
@@ -40,7 +40,7 @@ describe("todosReducer tests", () => {
       ];
       const action = saveTodo("Some to do");
       const expected = "Some to do";
-      const result = todosReducer(state, action);
+      const result = reducer(state, action);
 
       expect(result[0].text).toBe(expected);
     });
@@ -51,7 +51,7 @@ describe("todosReducer tests", () => {
         { text: "First to do", id: 1, completed: true },
       ];
       const action = saveTodo("Some to do");
-      const result = todosReducer(state, action);
+      const result = reducer(state, action);
       expect(result.length).toBe(3);
       expect(result[2].id).toBe(1);
     });
@@ -66,7 +66,7 @@ describe("todosReducer tests", () => {
 
       const action = completeTodo(1);
 
-      const result = todosReducer(state, action);
+      const result = reducer(state, action);
 
       expect(result).not.toBe(state);
       expect(result[1].completed).toBeFalsy();
@@ -79,7 +79,7 @@ describe("todosReducer tests", () => {
 
       const action = completeTodo(1);
 
-      const result = todosReducer(state, action);
+      const result = reducer(state, action);
 
       expect(result).not.toBe(state);
       expect(result[0]).not.toBe(todo);
@@ -91,7 +91,7 @@ describe("todosReducer tests", () => {
 
       const action = completeTodo(2);
 
-      const result = todosReducer(state, action);
+      const result = reducer(state, action);
 
       expect(result).toBe(state);
     });
@@ -102,7 +102,7 @@ describe("todosReducer tests", () => {
         { text: "First to do", id: 1, completed: false },
       ];
       const action = completeTodo(2);
-      const result = todosReducer(state, action);
+      const result = reducer(state, action);
       expect(result.length).toBe(2);
       expect(result[1].completed).toBeFalsy();
     });

@@ -1,12 +1,12 @@
-import { themeReducer } from "../themeReducer";
-import { toggleTheme } from "../actionTypes";
+import reducer from "./reducer";
+import { toggleTheme } from "./actions";
 
 describe("theme tests", () => {
   test("changes theme to dark from light", () => {
     const state = "light";
     const action = toggleTheme();
 
-    let result = themeReducer(state, action);
+    let result = reducer(state, action);
     expect(result).toBe("dark");
   });
 
@@ -14,7 +14,7 @@ describe("theme tests", () => {
     const state = "dark";
     const action = toggleTheme();
 
-    let result = themeReducer(state, action);
+    let result = reducer(state, action);
     expect(result).toBe("light");
   });
 });
