@@ -7,7 +7,7 @@ import { saveTodo } from '../../behavior/todos';
 import { useDispatch } from "react-redux";
 
 const Header = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [todoItem, setTodoItem] = useState("");
 
   const updateTodoItem = (e) => setTodoItem(e.target.value);
@@ -40,10 +40,6 @@ const Header = () => {
       </form>
     </header>
   );
-};
-
-Header.propTypes = {
-  saveTodo: PropTypes.func.isRequired,
 };
 
 export default Header;
