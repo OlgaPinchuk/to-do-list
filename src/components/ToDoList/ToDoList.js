@@ -1,20 +1,22 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./ToDoList.css";
 import ListItem from "../ListItem/ListItem";
-
 import Checkbox from "../common/Checkbox/Checkbox";
+import { useSelector, useDispatch } from "react-redux";
+import { showCompleted } from '../../behavior/completedShown';
 
-const ToDoList = ({ todos, completeTodo }) => {
-  const [completedShown, setCompletedShown] = useState(false);
+const ToDoList = () => {
+  const todos = useSelector(({ todos }) => todos);
+  const completedShown = useSelector(({ completedShown }) => completedShown);
+  const dispatch = useDispatch();
 
   const itemsToShow = completedShown
     ? todos
     : todos.filter((item) => !item.complete);
 
-  const showCompleted = (checked) => {
-    setCompletedShown(checked);
+  const clickHandler = (checked) => {
+    dispatch(showCompleted(checked));
   };
 
   return (
@@ -25,7 +27,7 @@ const ToDoList = ({ todos, completeTodo }) => {
           name="show-completed"
           className="show-completed-checkbox"
           initialIsChecked={completedShown}
-          onChanged={showCompleted}
+          onChanged={clickHandler}
         />
         <label htmlFor="showCompleted" className="show-completed-label">
           Show Completed Tasks
@@ -35,18 +37,13 @@ const ToDoList = ({ todos, completeTodo }) => {
         <TransitionGroup>
           {itemsToShow.map((item) => (
             <CSSTransition key={item.id} timeout={300}>
-              <ListItem item={item} completeTodo={completeTodo} />
+              <ListItem item={item} />
             </CSSTransition>
           ))}
         </TransitionGroup>
       </div>
     </>
   );
-};
-
-ToDoList.propTypes = {
-  todos: PropTypes.array.isRequired,
-  completeTodo: PropTypes.func.isRequired,
 };
 
 export default ToDoList;

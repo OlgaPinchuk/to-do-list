@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import Header from "../Header/Header";
 import ToDoList from "../ToDoList/ToDoList";
@@ -12,24 +12,9 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 
-function App() {
-  const [todos, setTodos] = useState([]);
-
-  const completeTodo = (todoId) => {
-    const newTodoIndex = todos.findIndex((item) => item.id === todoId);
-    if (newTodoIndex !== -1) {
-      const newTodos = [...todos];
-      newTodos[newTodoIndex].complete = true;
-      setTodos([...newTodos]);
-    }
-  };
-
-  return (
-    <Provider store={store}>
-      <Header />
-      <ToDoList todos={todos} completeTodo={completeTodo} />
-    </Provider>
-  );
-}
-
-export default App;
+export default () => (
+  <Provider store={store}>
+    <Header />
+    <ToDoList />
+  </Provider>
+);
