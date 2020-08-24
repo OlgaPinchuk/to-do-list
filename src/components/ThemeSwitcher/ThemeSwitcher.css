@@ -1,0 +1,14 @@
+.theme-switch-btn,
+.theme-switch-btn:hover,
+.theme-switch-btn:active {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  min-height: 40px;
+  color: white;
+  background: transparent;
+  border: none;
+  font-size: 19px;
+  cursor: pointer;
+  outline: none;
+}
