@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import "./Header.css";
 
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import Input from "../common/Input/Input";
-import { saveTodo } from '../../behavior/todos';
-import { useDispatch } from "react-redux";
+import { saveTodo } from "../../behavior/todos";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
   const dispatch = useDispatch();
   const [todoItem, setTodoItem] = useState("");
+  const theme = useSelector(({ theme }) => theme);
+  const todosNumber = useSelector(({ todos }) => todos).length;
 
   const updateTodoItem = (e) => setTodoItem(e.target.value);
 
@@ -19,7 +21,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
+    <header className={`header ${theme}`}>
       <h1>Your tasks</h1>
       <form className="task-input-container" onSubmit={handleSubmit}>
         <Input
@@ -27,7 +29,7 @@ const Header = () => {
           className="task-input"
           onChange={updateTodoItem}
           value={todoItem}
-          placeholder="Add new task"
+          placeholder={`Add new task (total: ${todosNumber})`}
         />
         <Input
           id="submitButton"
@@ -38,6 +40,7 @@ const Header = () => {
           disabled={!todoItem}
         />
       </form>
+      <ThemeSwitcher />
     </header>
   );
 };

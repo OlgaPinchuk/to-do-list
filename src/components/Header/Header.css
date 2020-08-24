@@ -1,7 +1,7 @@
 .header {
   padding: 1.5vw;
   width: 100%;
-  height: 30vh;
+  min-height: 30vh;
   text-align: center;
   background: #46529d;
   color: #fff;
@@ -29,7 +29,7 @@
 .add-btn {
   padding: 1.5em;
   color: #fff;
-  background: #2ebaee;
+  background: mediumspringgreen;
   text-transform: uppercase;
   font-weight: bold;
   border: none;
@@ -40,4 +40,8 @@
 .add-btn:disabled {
   opacity: 0.6;
   pointer-events: none;
+}
+
+.dark {
+  background: #2d2d2d;
 }
