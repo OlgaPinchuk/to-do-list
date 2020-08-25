@@ -1,17 +1,15 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./ThemeSwitcher.css";
-
-import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../../behavior/theme";
+import { connect } from "react-redux";
 
-const ThemeSwitcher = () => {
-  const theme = useSelector(({ theme }) => theme);
+const ThemeSwitcher = ({ theme, toggleTheme }) => {
   const themeToSwitch = theme === "dark" ? "light" : "dark";
-  const dispatch = useDispatch();
 
   return (
     <button
-      onClick={() => dispatch(toggleTheme())}
+      onClick={() => toggleTheme()}
       className="theme-switch-btn"
     >
       Switch theme to {themeToSwitch}
@@ -19,4 +17,9 @@ const ThemeSwitcher = () => {
   );
 };
 
-export default React.memo(ThemeSwitcher);
+ThemeSwitcher.propTypes = {
+  theme: PropTypes.string.isRequired,
+  toggleTheme: PropTypes.func.isRequired,
+};
+
+export default connect(({ theme }) => ({ theme }), { toggleTheme })(ThemeSwitcher);
