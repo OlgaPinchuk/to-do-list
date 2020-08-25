@@ -10,7 +10,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const [todoItem, setTodoItem] = useState("");
   const theme = useSelector(({ theme }) => theme);
-  const todosNumber = useSelector(({ todos }) => todos).length;
+  const todosNumber = useSelector(({ todos }) => todos.length);
 
   const updateTodoItem = (e) => setTodoItem(e.target.value);
 
