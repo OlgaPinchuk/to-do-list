@@ -8,7 +8,6 @@ import { ListContext } from "../../ListContext";
 import Checkbox from "../common/Checkbox/Checkbox";
 
 const ToDoList = () => {
-  // console.log("ToDoList is rendered");
   const { todos } = useContext(ListContext);
 
   const [completedShown, setCompletedShown] = useState(false);

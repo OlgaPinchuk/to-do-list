@@ -4,7 +4,6 @@ import Checkbox from "../common/Checkbox/Checkbox";
 import { ListContext } from "../../ListContext";
 
 const ListItem = ({ item: { id, complete, text } }) => {
-  //  console.log("ListItem is rendered");
   const { completeTodo } = useContext(ListContext);
 
   return (
