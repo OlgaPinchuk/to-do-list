@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import "./ThemeSwitcher.css";
 import { toggleTheme } from "../../behavior/theme";
 import { connect } from "react-redux";
+import { THEME_LIGHT, THEME_DARK } from "../../behavior/theme/themeConstants";
 
 const ThemeSwitcher = ({ theme, toggleTheme }) => {
-  const themeToSwitch = theme === "dark" ? "light" : "dark";
+  const themeToSwitch = theme === THEME_DARK ? THEME_LIGHT : THEME_DARK;
 
   return (
     <button
