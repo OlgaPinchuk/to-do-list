@@ -1,14 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Checkbox from "../common/Checkbox/Checkbox";
-import { useDispatch } from "react-redux";
-import { completeTodo } from '../../behavior/todos';
+import { connect } from "react-redux";
+import { completeTodo } from "../../behavior/todos";
 
-const ListItem = ({ item: { id, completed, text } }) => {
-  const dispatch = useDispatch();
-
+const ListItem = ({ item: { id, completed, text }, completeTodo }) => {
   return (
-    <div className="list-item" onClick={() => dispatch(completeTodo(id))}>
+    <div className="list-item" onClick={() => completeTodo(id)}>
       <Checkbox
         name="select-done"
         id={id}
@@ -20,7 +18,7 @@ const ListItem = ({ item: { id, completed, text } }) => {
         {text}
       </label>
     </div>
-  )
+  );
 };
 
 ListItem.propTypes = {
@@ -29,6 +27,7 @@ ListItem.propTypes = {
     completed: PropTypes.bool,
     text: PropTypes.string.isRequired,
   }).isRequired,
+  completeTodo: PropTypes.func.isRequired,
 };
 
-export default ListItem;
+export default connect(null, { completeTodo })(ListItem);

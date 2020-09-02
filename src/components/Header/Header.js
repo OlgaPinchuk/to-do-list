@@ -1,22 +1,20 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import "./Header.css";
 
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import Input from "../common/Input/Input";
 import { saveTodo } from "../../behavior/todos";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 
-const Header = () => {
-  const dispatch = useDispatch();
+const Header = ({ saveTodo, theme, todosNumber }) => {
   const [todoItem, setTodoItem] = useState("");
-  const theme = useSelector(({ theme }) => theme);
-  const todosNumber = useSelector(({ todos }) => todos.length);
 
   const updateTodoItem = (e) => setTodoItem(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(saveTodo(todoItem));
+    saveTodo(todoItem);
     setTodoItem("");
   };
 
@@ -45,4 +43,13 @@ const Header = () => {
   );
 };
 
-export default Header;
+Header.propTypes = {
+  saveTodo: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
+  todosNumber: PropTypes.array.isRequired,
+};
+
+export default connect(
+  ({ theme, todos }) => ({ theme, todosNumber: todos.length }),
+  { saveTodo }
+)(Header);
