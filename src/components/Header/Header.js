@@ -46,7 +46,7 @@ const Header = ({ saveTodo, theme, todosNumber }) => {
 Header.propTypes = {
   saveTodo: PropTypes.func.isRequired,
   theme: PropTypes.string.isRequired,
-  todosNumber: PropTypes.array.isRequired,
+  todosNumber: PropTypes.number.isRequired,
 };
 
 export default connect(

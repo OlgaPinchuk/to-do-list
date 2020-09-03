@@ -45,7 +45,10 @@ const ToDoList = ({todos, completedShown, showCompleted}) => {
 };
 
 ToDoList.propTypes = {
-  todos: PropTypes.array.isRequired,
+  todos: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    completed: PropTypes.bool,
+  })).isRequired,
   completedShown: PropTypes.bool.isRequired,
   showCompleted: PropTypes.func.isRequired,
 };
