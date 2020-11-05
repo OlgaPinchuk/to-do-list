@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import ToDoList from "./components/ToDoList/ToDoList";
@@ -6,18 +6,31 @@ import ToDoList from "./components/ToDoList/ToDoList";
 function App() {
   const [todos, setTodos] = useState([]);
 
-  const saveTodo = (todoItem) => {
-    setTodos([todoItem, ...todos]);
-  };
+  useEffect(() => {
+    document.title = `${todos.length} items in list`;
+    console.log(`${todos.length} items to do`);
+  }, [todos.length]);
 
-  const completeTodo = (todoId) => {
-    const newTodoIndex = todos.findIndex((item) => item.id === todoId);
-    if (newTodoIndex !== -1) {
-      const newTodos = [...todos];
-      newTodos[newTodoIndex].complete = true;
-      setTodos([...newTodos]);
-    }
-  };
+  const saveTodo = useCallback((todoItem) => {
+    setTodos((stateTodos) => {
+      const newTodos = [todoItem, ...stateTodos];
+      return newTodos;
+    });
+  }, []);
+
+  const completeTodo = useCallback((todoId) => {
+    setTodos((stateTodos) => {
+      const newTodoIndex = stateTodos.findIndex((item) => item.id === todoId);
+
+      if (newTodoIndex !== -1) {
+        const newTodos = [...stateTodos];
+        newTodos[newTodoIndex] = { ...newTodos[newTodoIndex], complete: true };
+        return newTodos;
+      }
+
+      return stateTodos;
+    });
+  }, []);
 
   return (
     <>

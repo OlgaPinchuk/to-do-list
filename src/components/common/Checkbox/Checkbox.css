@@ -36,6 +36,7 @@
 }
 .default:checked::before {
   opacity: 1;
+  cursor: default;
 }
 .default:disabled {
   opacity: 0.5;

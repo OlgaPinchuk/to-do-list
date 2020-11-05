@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import "./Header.css";
 
 import Input from "../common/Input/Input";
+const MemoizedInput = React.memo(Input);
 
 const Header = ({ saveTodo }) => {
   const [todoItem, setTodoItem] = useState("");
 
-  const updateTodoItem = (e) => setTodoItem(e.target.value);
+  const updateTodoItem = useCallback((e) => setTodoItem(e.target.value), []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,14 +20,14 @@ const Header = ({ saveTodo }) => {
     <header className="header">
       <h1>Your tasks</h1>
       <form className="task-input-container" onSubmit={handleSubmit}>
-        <Input
+        <MemoizedInput
           name="task-input"
           className="task-input"
           onChange={updateTodoItem}
           value={todoItem}
           placeholder="Add new task"
         />
-        <Input
+        <MemoizedInput
           id="submitButton"
           name="submit-btn"
           type="submit"
